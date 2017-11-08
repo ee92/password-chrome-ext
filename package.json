@@ -17,7 +17,18 @@
     "scryptsy": "^2.0.0",
     "sha256": "^0.2.0"
   },
+    "devDependencies": {
+        "gulp": "^3.9.1",
+        "gulp-zip" : "^1.0.0"
+    },
     "scripts" : {
-        "bundle": "browserify js/app.js -o bundle.js"
+        "bundle": "browserify js/app.js -o bundle.js",
+        "gulp": "gulp",
+        "clean": "rm -rf build && mkdir build && npm prune && npm install",
+        "version": "json -I -f extension/manifest.json -e \"this.version='`echo $npm_package_version`'\"",
+        "zip:firefox": "cp build/lesspass.zip build/lesspass.firefox-v$npm_package_version.xpi",
+        "zip:chrome": "cp build/lesspass.zip build/lesspass.chrome-v$npm_package_version.zip",
+        "zip": "git archive -o build/hashpass.zip HEAD:extension && npm run zip:firefox && npm run zip:chromeb",
+        "build": "npm run clean && npm run bundle && gulp"
     }
 }
