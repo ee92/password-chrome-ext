@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="js/jquery.js"></script>
+</head>
+<body>
+
+	<div id="header">
+		<h1>Password Generator</h1>
+	</div>
+
+	<div id="main">
+		<div class="input-group">
+		  <select class="form-control" id="select"></select>
+			<span class="input-group-btn" id="addurl">
+				<button id="addurlbtn" class="btn btn-default">+</button>
+				<button id="removeurlbtn" class="btn btn-default">-</button>
+			</span>
+			<input class="form-control center" id="url" placeholder="URL" style="display: none;">
+			<span class="input-group-btn" id="confirmurl" style="display: none;">
+				<button id="confirmurlbtn" class="btn btn-default">&#10003</button>
+				<button id="denyurlbtn" class="btn btn-default">&#215</button>
+			</span>
+		</div>
+		<input class="form-control center" id="login" placeholder="login">
+		<form class="form-inline">
+			<div class="input-group">
+				<input class="form-control" id="master" placeholder="masterpass" type="password">
+				<span id="symbols" class="input-group-addon"></span>
+			</div>
+		</form>
+		<div class="center">
+			<div class="input-group">
+    		<input class="form-control" id="salt" readonly>
+      	<span class="input-group-btn" id="newsalt">
+      		<button id="saltbtn" class="btn btn-default">
+						<img src="img/salt.png" height="18">
+					</button>
+    		</span>
+				<span class="input-group-btn" id='setsalt' style="display: none;">
+      		<button id="saltconfirm" class="btn btn-default">&#10003</button>
+					<button id="saltdeny" class="btn btn-default">&#215</button>
+    		</span>
+      </div>
+		</div>
+		<br>
+		<button id="genbtn" class="btn btn-primary">Generate Password</button>
+		<br><br>
+		<div class="center">
+			<div class="input-group">
+    		<input class="form-control" id="pass" readonly>
+      	<span class="input-group-btn">
+      		<button id="copy" class="btn btn-default" data-clipboard-target="#pass">copy</button>
+    		</span>
+      </div>
+		</div>
+	</div>
+
+	<script src="js/clipboard.js"></script>
+	<script src="js/words.js"></script>
+	<script src="bundle.js"></script>
+	<!-- <script src="js/app.js"></script> -->
+</body>
+</html>

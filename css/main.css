@@ -1,0 +1,37 @@
+body {
+	min-width: 375px;
+	text-align: center;
+	background-image: url('../img/bg.jpg');
+}
+
+#header {
+	background-color: rgba(0, 0, 0, .6);
+}
+
+#header h1 {
+	color: white;
+	margin: 0;
+	padding: 10px;
+}
+
+#main {
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 25px;
+	margin: 5%;
+	padding: 20px;
+}
+
+#symbols {
+	background-color: white;
+	color: black;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+@media(max-width: 500px){
+	body{
+		max-width: 495px;
+	}
+}
