@@ -16,5 +16,8 @@
     "pbkdf2": "^3.0.14",
     "scryptsy": "^2.0.0",
     "sha256": "^0.2.0"
-  }
+  },
+    "scripts" : {
+        "bundle": "browserify js/app.js -o bundle.js"
+    }
 }
