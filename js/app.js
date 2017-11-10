@@ -275,6 +275,14 @@ $("#confirmurlbtn").click(() => {
   toggleURL();
 });
 
+$("#see").click(() => {
+  if ($("#pass").attr("type") == "password") {
+    $("#pass").attr("type", "text")
+  } else {
+    $("#pass").attr("type","password")
+  }
+});
+
 
 // DISPLAY INFO FOR SELECTED DOMAIN, ON CHANGE
 $('#select').on('change', () => {
