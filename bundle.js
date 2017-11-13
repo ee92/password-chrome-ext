@@ -191,18 +191,21 @@ function showSalt(){
 
 
 // GET INFO FROM DOM AND GENERATE PASSWORD
-function getPassword() {
+function getPassword(callback) {
   var login = $('#login').val();
   var master = $('#master').val();
   var domain = $('#select').val();
   var salt = $('#salt').val();
-  var password = generatePassword(domain, login, master, salt);
-  $('#pass').val(password);
+
+  var password = generatePassword(domain, login, master, salt, (password) => {
+    $('#pass').val(password);
+    callback();
+  });
 };
 
 // USE PARAMS TO GENERATE HEX HASH, EXTRACT NUMBERS, USE NUMBERS TO GET INDEX
 // OF DICTIONARY WORDS, NUMBER, AND SYMBOL
-function generatePassword(domain, login, master, salt) {
+function generatePassword(domain, login, master, salt, callback) {
   var symbols = ["!","@","#","$","%","?","&","*","^"];
   var str = domain + login + master;
   var hashnum = scrypt(str, salt, 16384, 8, 1, 64).toString('hex').split('').filter((x) => {
@@ -213,7 +216,8 @@ function generatePassword(domain, login, master, salt) {
   var w3 = Number(hashnum.slice(14,21).join('')) % words.length;
   var sym = symbols[Number(hashnum.slice(0,2).join('')) % symbols.length];
   var num = hashnum[0];
-  return words[w1][0].toUpperCase() + words[w1].slice(1) + words[w2][0].toUpperCase() + words[w2].slice(1) + words[w3][0].toUpperCase() + words[w3].slice(1) + num + sym;
+  var password = (words[w1][0].toUpperCase() + words[w1].slice(1) + words[w2][0].toUpperCase() + words[w2].slice(1) + words[w3][0].toUpperCase() + words[w3].slice(1) + num + sym);
+  callback(password);
 };
 
 
@@ -308,17 +312,21 @@ $('#master').keyup(() => {
   $('#symbols').html("&#"+s1 + "&#"+s2 + "&#"+s3);
 });
 
-// GET PASSWORD AND STORE ALL INFO (DOMAIN, ALIASES, LOGIN, SALT)
+// GET PASS, COPY TO CLIPBOARD AND STORE ALL INFO (DOMAIN, ALIASES, LOGIN, SALT)
 $('#genbtn').click(() => {
-  getPassword();
-  storeInfo();
+  getPassword(() => {
+    $("#pass").attr("type", "text");
+    $("#pass").select();
+    document.execCommand("copy");
+    $("#pass").attr("type", "password");
+    storeInfo();
+  });
 });
 
 // KEYBOARD SHORTCUT FOR GENERATE PASSWORD BUTTON AND COPY TO CLIPBOARD
 $(document).keypress((e) => {
   if (e.which == 13) {
     $('#genbtn').click();
-    $('#copy').click();
   };
 });
 
